@@ -1,0 +1,8 @@
+h1 Ändra Pokemon
+
+form method="post" action="/pokedex/#{@pokemon['id']}/edit"
+
+  input name="name" value=@pokemon["name"]
+  br
+
+  button Spara

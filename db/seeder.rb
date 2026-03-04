@@ -1,10 +1,9 @@
 require 'sqlite3'
 
-db = SQLite3::Database.new("databas.db")
-
+db = SQLite3::Database.new("db/pokedex.db")
 
 def seed!(db)
-  puts "Using db file: db/todos.db"
+  puts "Using db file: db/pokedex.db"
   puts "🧹 Dropping old tables..."
   drop_tables(db)
   puts "🧱 Creating tables..."
@@ -15,27 +14,21 @@ def seed!(db)
 end
 
 def drop_tables(db)
-  db.execute('DROP TABLE IF EXISTS exempel')
+  db.execute('DROP TABLE IF EXISTS pokemons')
 end
 
 def create_tables(db)
-  db.execute('CREATE TABLE exempel (
+  db.execute('CREATE TABLE pokemons (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               name TEXT NOT NULL, 
-              description TEXT,
-              state BOOLEAN)')
+              location TEXT,
+              )')
 end
 
 def populate_tables(db)
-  db.execute('INSERT INTO exempel (name, description, state) VALUES ("Köp mjölk", "3 liter mellanmjölk, eko",false)')
-  db.execute('INSERT INTO exempel (name, description, state) VALUES ("Köp julgran", "En rödgran",false)')
-  db.execute('INSERT INTO exempel (name, description, state) VALUES ("Pynta gran", "Glöm inte lamporna i granen och tomten",false)')
+  db.execute('INSERT INTO pokemons (name, location) VALUES ("Pikachu", "Viridian Forest",)')
+  db.execute('INSERT INTO pokemons (name, location) VALUES ("Charmander", "Starter Pokémon")')
+  db.execute('INSERT INTO pokemons (name, location) VALUES ("Bulbasaur", "Starter Pokémon")')
 end
 
-
 seed!(db)
-
-
-
-
-
