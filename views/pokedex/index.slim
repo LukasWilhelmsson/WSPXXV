@@ -1,0 +1,27 @@
+h1 Pokedex
+
+a href="/pokedex/new" Lägg till
+
+br
+br
+
+- @pokemons.each do |p|
+
+  div style="border:1px solid #ccc; padding:10px; margin:10px;"
+
+    img src=p["image"] width="80"
+
+    h3 = p["name"]
+
+    p = p["shiny"]==1 ? "✨ Shiny" : "Normal"
+
+    p = p["location"]
+
+    a href="/pokedex/#{p['id']}" Visa
+
+    |  |
+
+    a href="/pokedex/#{p['id']}/edit" Ändra
+
+    form method="post" action="/pokedex/#{p['id']}/delete" style="display:inline;"
+      button Ta bort

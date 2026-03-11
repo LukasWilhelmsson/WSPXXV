@@ -1,0 +1,24 @@
+h1 Ändra Pokemon
+
+form method="post" action="/pokedex/#{@pokemon['id']}/edit"
+
+  input name="name" value=@pokemon["name"]
+  br
+
+  input name="location" value=@pokemon["location"]
+  br
+
+  input name="image" value=@pokemon["image"]
+  br
+
+  label
+    input type="checkbox" name="shiny" checked=@pokemon["shiny"]==1
+    | Shiny
+  br
+
+  label
+    input type="checkbox" name="found" checked=@pokemon["found"]==1
+    | Hittad
+  br
+
+  button Uppdatera

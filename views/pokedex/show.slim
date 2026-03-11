@@ -1,0 +1,11 @@
+h1 = @pokemon["name"]
+
+img src=@pokemon["image"] width="150" if @pokemon["image"]
+
+p Plats: #{@pokemon["location"]}
+
+p = @pokemon["shiny"]==1 ? "✨ Shiny" : "Normal"
+
+p = @pokemon["found"]==1 ? "Hittad" : "Inte hittad"
+
+a href="/pokedex" Tillbaka

@@ -50,18 +50,21 @@ get("/pokedex/:id/edit") do
     id
   ).first
 
-  slim :"pokedex/edit"
+  slim(:"pokedex/edit")
 end
 
 post("/pokedex") do
 
   name = params[:name]
   location = params[:location]
+  image = params[:image]
+  shiny = params[:shiny] ? 1 : 0
+  found = params[:found] ? 1 : 0
 
   db.execute(
-    "INSERT INTO pokemons (name, location)
-     VALUES (?,?)",
-    [name, location]
+    "INSERT INTO pokemons (name, location, image, shiny, found)
+     VALUES (?,?,?,?,?)",
+    [name, location, image, shiny, found]
   )
 
   redirect("/pokedex")
@@ -73,12 +76,15 @@ post("/pokedex/:id/edit") do
 
   name = params[:name]
   location = params[:location]
+  image = params[:image]
+  shiny = params[:shiny] ? 1 : 0
+  found = params[:found] ? 1 : 0
 
   db.execute(
     "UPDATE pokemons
-     SET name=?, location=?
-     WHERE id=?",
-    [name, location, id]
+     SET name=?, location=?, image=?, shiny=?, found=?
+     WHERE id=?", 
+    [name, location, image, shiny, found, id]
   )
 
   redirect("/pokedex")
@@ -93,4 +99,12 @@ post("/pokedex/:id/delete") do
   )
 
   redirect("/pokedex")
+end
+post("/pokedex/:id/toggle_shiny") do
+  db.execute(
+    "UPDATE pokemons SET shiny = 1 - shiny WHERE id=?",
+    params[:id]
+  )
+
+  redirect "/pokedex"
 end
